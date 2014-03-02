@@ -70,11 +70,11 @@ while curr_error > epsilon:
 
 
 	f_k = 0.5*w_squared + C*errors
-	print "ITERATION: ", k
-	print f_k
+	# print "ITERATION: ", k
+	# print f_k
 	curr_error = abs(((prev_fk)-f_k)/prev_fk*100)
 	prev_fk = f_k
-	print curr_error
+	print k, curr_error
 
 print w
 print k

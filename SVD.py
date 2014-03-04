@@ -58,8 +58,13 @@ while curr_error > epsilon:
 		w[j] = w[j] - step*(w[j]+C*gradient)
 	gradient_b = 0
 	for i in range(n):
-		gradient_b += y[i]
-	gradient_b*=-1*d*C
+		confidence = y[i]*(np.dot(x[i],w)+b)
+		if confidence >= 1:
+			gradient_b += 0
+		else:
+			gradient_b += y[i]
+
+	gradient_b*=-1*C
 	b = b-step*gradient_b
 	k=k+1
 	w_squared = 0

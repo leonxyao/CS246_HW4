@@ -29,21 +29,13 @@ for index,line in enumerate(file):
 
 
 curr_error = 10000000000
-w_init = 0
-prev_fk = 0
-
-for j in range(d):
-	w_init+=w[j]**2
-
-prev_int = 0
 for i in range(n):
-	inner_sum=0
-	for j in range(d):
-		inner_sum+=w[j]*x[i][j]
-	prev_int+=max(0,1-y[i]*(inner_sum+b))
-prev_fk = 0.5*w_init + C*prev_int
-print prev_fk
+		confidence = 1-y[i]*(np.dot(w,x[i])+b)
+		errors+=max(0,confidence)
 
+
+prev_fk = 0.5*sum(w**2) + C*errors 
+print prev_fk
 
 while curr_error > epsilon:
 	w_prev = copy.copy(w)
@@ -62,29 +54,25 @@ while curr_error > epsilon:
 		if confidence >= 1:
 			gradient_b += 0
 		else:
-			gradient_b += y[i]
+			gradient_b += -1*y[i]
 
-	gradient_b*=-1*C
+	gradient_b*=C
 	b = b-step*gradient_b
 	k=k+1
-	w_squared = 0
+
 	errors = 0
-	for j in range(d):
-		w_squared+=w[j]**2
 
 	for i in range(n):
-		inner_sum=0
-		for j in range(d):
-			inner_sum+=w[j]*x[i][j]
-		errors+=max(0,1-y[i]*(inner_sum+b))
+		confidence = 1-y[i]*(np.dot(w,x[i])+b)
+		errors+=max(0,confidence)
 
 
-	f_k = 0.5*w_squared + C*errors
+	f_k = 0.5*sum(w**2) + C*errors 
 	# print "ITERATION: ", k
 	# print f_k
 	curr_error = abs(((prev_fk)-f_k)/prev_fk*100)
 	prev_fk = f_k
-	print k, curr_error
+	print k, curr_error, f_k
 
 print w
 print k

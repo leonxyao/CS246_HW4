@@ -11,7 +11,6 @@ w = np.zeros((122))
 b=0
 
 
-
 x = np.zeros((n,d))
 file = open('features.txt','r')
 for index,line in enumerate(file):
@@ -35,7 +34,8 @@ for old_index, new_index in enumerate(permutation):
 x = shuffled_x
 y = shuffled_y
 
-curr_error = 10000000000
+curr_error = 5
+prev_error = 5
 init_errors = 0
 for i in range(n):
 	confidence = 1-y[i]*(np.dot(w,x[i])+b)
@@ -72,7 +72,8 @@ while curr_error > epsilon:
 	f_k = 0.5*sum(w**2) + C*errors 
 	# print "ITERATION: ", k
 	# print f_k
-	curr_error = 0.5*abs(((prev_fk)-f_k)/prev_fk*100) + 0.5*abs(prev_fk-f_k)
+	curr_error = 0.5*abs(((prev_fk)-f_k)/prev_fk*100) + 0.5*prev_error
+	prev_error = curr_error
 	prev_fk = f_k
 	print k, curr_error, f_k
 

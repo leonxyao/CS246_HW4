@@ -29,12 +29,13 @@ for index,line in enumerate(file):
 
 
 curr_error = 10000000000
+init_errors = 0
 for i in range(n):
 		confidence = 1-y[i]*(np.dot(w,x[i])+b)
-		errors+=max(0,confidence)
+		init_errors+=max(0,confidence)
 
 
-prev_fk = 0.5*sum(w**2) + C*errors 
+prev_fk = 0.5*sum(w**2) + C*init_errors 
 print prev_fk
 
 while curr_error > epsilon:

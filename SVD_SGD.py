@@ -24,6 +24,17 @@ file = open('target.txt','r')
 for index,line in enumerate(file):
 	y[index]=float(line)
 
+shuffled_x = np.empty(x.shape, dtype=x.dtype)
+shuffled_y = np.empty(y.shape, dtype=y.dtype)
+permutation = np.random.permutation(len(x))
+
+for old_index, new_index in enumerate(permutation):
+    shuffled_x[new_index] = x[old_index]
+    shuffled_y[new_index] = y[old_index]
+
+x = shuffled_x
+y = shuffled_y
+
 curr_error = 10000000000
 w_init = 0
 prev_fk = 0

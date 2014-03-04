@@ -1,5 +1,7 @@
 import collections
 import numpy as np
+import random
+import copy
 
 C=100
 k=0
@@ -24,6 +26,8 @@ file = open('target.txt','r')
 for index,line in enumerate(file):
 	y[index]=float(line)
 
+
+
 curr_error = 10000000000
 w_init = 0
 prev_fk = 0
@@ -42,10 +46,11 @@ print prev_fk
 
 
 while curr_error > epsilon:
+	w_prev = copy.copy(w)
 	for j in range(d):
 		gradient = 0
 		for i in range(n):
-			confidence = y[i]*(np.dot(x[i],w)+b)
+			confidence = y[i]*(np.dot(x[i],w_prev)+b)
 			if confidence >= 1:
 				gradient += 0
 			else:

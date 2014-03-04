@@ -43,7 +43,7 @@ while curr_error > epsilon:
 	for j in range(d):
 		gradient = 0
 		for i in range(n):
-			confidence = y[i]*(sum(x[i,:]*w)+b)
+			confidence = y[i]*(sum(x[i]*w)+b)
 			if confidence >= 1:
 				gradient += 0
 			else:
@@ -65,7 +65,7 @@ while curr_error > epsilon:
 	errors = 0
 
 	for i in range(n):
-		confidence = 1-y[i]*(sum(w*x[i,:])+b)
+		confidence = 1-y[i]*(sum(w*x[i])+b)
 		errors+=max(0,confidence)
 
 

@@ -39,11 +39,11 @@ prev_fk = 0.5*sum(w**2) + C*init_errors
 print prev_fk
 
 while curr_error > epsilon:
-	w_prev = copy.copy(w)
+	#w_prev = copy.copy(w)
 	for j in range(d):
 		gradient = 0
 		for i in range(n):
-			confidence = y[i]*(np.dot(x[i],w_prev)+b)
+			confidence = y[i]*(np.dot(x[i],w)+b)
 			if confidence >= 1:
 				gradient += 0
 			else:

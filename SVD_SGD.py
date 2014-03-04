@@ -9,6 +9,7 @@ d=122
 n=6414
 w = np.zeros((122))
 b=0
+f_all = []
 
 
 
@@ -44,6 +45,7 @@ for i in range(n):
 
 prev_fk = 0.5*sum(w**2) + C*init_errors 
 print prev_fk
+f_all.append(prev_fk)
 
 i=0
 while curr_error > epsilon:
@@ -72,7 +74,8 @@ while curr_error > epsilon:
 	f_k = 0.5*sum(w**2) + C*errors 
 	# print "ITERATION: ", k
 	# print f_k
-	curr_error = abs(((prev_fk)-f_k)/prev_fk*100)
+	curr_error = 0.5*abs(((prev_fk)-f_k)/prev_fk*100) + 0.5*abs(prev_fk-f_k)
+	f_all.append(prev_fk)
 	prev_fk = f_k
 	print k, curr_error, f_k
 

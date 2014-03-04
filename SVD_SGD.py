@@ -9,7 +9,6 @@ d=122
 n=6414
 w = np.zeros((122))
 b=0
-f_all = []
 
 
 
@@ -45,7 +44,6 @@ for i in range(n):
 
 prev_fk = 0.5*sum(w**2) + C*init_errors 
 print prev_fk
-f_all.append(prev_fk)
 
 i=0
 while curr_error > epsilon:
@@ -63,7 +61,7 @@ while curr_error > epsilon:
 		gradient_b = 0
 	b = b-step*gradient_b
 	k=k+1
-	i=i%n+1
+	i=(i%n)+1
 
 	errors = 0
 	for i in range(n):
@@ -75,7 +73,6 @@ while curr_error > epsilon:
 	# print "ITERATION: ", k
 	# print f_k
 	curr_error = 0.5*abs(((prev_fk)-f_k)/prev_fk*100) + 0.5*abs(prev_fk-f_k)
-	f_all.append(prev_fk)
 	prev_fk = f_k
 	print k, curr_error, f_k
 

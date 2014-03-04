@@ -31,7 +31,7 @@ for index,line in enumerate(file):
 curr_error = 10000000000
 init_errors = 0
 for i in range(n):
-	confidence = 1-y[i]*(sum(w*x[i,:])+b)
+	confidence = 1-y[i]*(np.dot(w,x[i])+b)
 	init_errors+=max(0,confidence)
 
 
@@ -43,19 +43,15 @@ while curr_error > epsilon:
 	for j in range(d):
 		gradient = 0
 		for i in range(n):
-			confidence = y[i]*(sum(x[i]*w)+b)
-			if confidence >= 1:
-				gradient += 0
-			else:
-				gradient += -1*y[i]+x[i][j]
+			confidence = y[i]*(np.dot(x[i],w)+b)
+			if confidence < 1:
+				gradient += -1*y[i]*x[i][j]
 		w[j] = w[j] - step*(w[j]+C*gradient)
 
 	gradient_b = 0
 	for i in range(n):
-		confidence = y[i]*(sum(x[i,:]*w)+b)
-		if confidence >= 1:
-			gradient_b += 0
-		else:
+		confidence = y[i]*(np.dot(x[i],w)+b)
+		if confidence < 1:
 			gradient_b += -1*y[i]
 
 	gradient_b*=C
@@ -63,9 +59,8 @@ while curr_error > epsilon:
 	k=k+1
 
 	errors = 0
-
 	for i in range(n):
-		confidence = 1-y[i]*(sum(w*x[i])+b)
+		confidence = 1-y[i]*(np.dot(w,x[i])+b)
 		errors+=max(0,confidence)
 
 
@@ -76,8 +71,6 @@ while curr_error > epsilon:
 	prev_fk = f_k
 	print k, curr_error, f_k
 
-print w
-print k
 
 
 

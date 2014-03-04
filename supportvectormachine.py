@@ -33,7 +33,7 @@ def calculatePercentCost(weight, bias,costfuncvalues,numiterations):
 def calculateCostFunction(weight,bias):
 	"""Calculates cost function for given weight and bias."""
 	errorvals=0.0
-	numvectors=featuredata.shape[0]
+	#numvectors=featuredata.shape[0]
 	for i in range(numvectors):
 		confidence=1-outputdata[i]*(sum(featuredata[i]*weight)+bias)
 		errorvals+=max(0,confidence)
@@ -42,7 +42,7 @@ def calculateCostFunction(weight,bias):
 def calculateCostFunctionStoch(weight,bias):
 	"""Calculates cost function for given weight and bias."""
 	errorvals=0.0
-	numvectors=featuredata.shape[0]
+	#numvectors=featuredata.shape[0]
 	for i in range(numvectors):
 		confidence=1-featuredata[i][numfeatures]*(sum(featuredata[i][0:numfeatures]*weight)+bias)
 		errorvals+=max(0,confidence)
@@ -59,7 +59,7 @@ def calculateError(weight, bias):
 		if output!=testfeaturedata[i][numfeatures]:
 			numincorrect+=1
 	print 'percent error', float(numincorrect)/testfeaturedata.shape[0]*100
-	
+
 ###################################################################################
 #Batch Method
 
@@ -210,45 +210,45 @@ def runMiniBatchGD():
 		print costval
 
 ################################################################################################
-runBatchGD()
-# starttime=time.time()
-# if __name__=="__main__":
-# 	data=[]
-# 	with open(trainingfeaturesfile,'r') as f:
-# 		for line in f:	
-# 			linestrip=line.strip().split(',')
-# 			data.append([float(x) for x in linestrip])
-# 	#featuredata=np.array(data) #stores feature vectors
 
-# 	classdata=[]
-# 	with open(trainingtargetfile,'r') as f:
-# 		i=0
-# 		for line in f:
-# 			linestrip=line.strip()
-# 			#classdata.append(float(linestrip))
-# 			data[i].append(float(linestrip))
-# 			i+=1
+starttime=time.time()
+if __name__=="__main__":
+	data=[]
+	with open(trainingfeaturesfile,'r') as f:
+		for line in f:	
+			linestrip=line.strip().split(',')
+			data.append([float(x) for x in linestrip])
+	#featuredata=np.array(data) #stores feature vectors
 
-# 	#outputdata=np.array(classdata)
-# 	featuredata=np.array(data)
+	classdata=[]
+	with open(trainingtargetfile,'r') as f:
+		i=0
+		for line in f:
+			linestrip=line.strip()
+			#classdata.append(float(linestrip))
+			data[i].append(float(linestrip))
+			i+=1
 
-# 	testdata=[]
-# 	with open(testfeaturesfile,'r') as f:
-# 		for line in f:	
-# 			linestrip=line.strip().split(',')
-# 			testdata.append([float(x) for x in linestrip])
-# 	#featuredata=np.array(data) #stores feature vectors
-# 	with open(testtargetfile,'r') as f:
-# 		i=0
-# 		for line in f:
-# 			linestrip=line.strip()
-# 			#classdata.append(float(linestrip))
-# 			testdata[i].append(float(linestrip))
-# 			i+=1
-# 	testfeaturedata=np.array(testdata)
+	#outputdata=np.array(classdata)
+	featuredata=np.array(data)
+
+	testdata=[]
+	with open(testfeaturesfile,'r') as f:
+		for line in f:	
+			linestrip=line.strip().split(',')
+			testdata.append([float(x) for x in linestrip])
+	#featuredata=np.array(data) #stores feature vectors
+	with open(testtargetfile,'r') as f:
+		i=0
+		for line in f:
+			linestrip=line.strip()
+			#classdata.append(float(linestrip))
+			testdata[i].append(float(linestrip))
+			i+=1
+	testfeaturedata=np.array(testdata)
 	
-# 	weight,bias=runBatchGD()#runStochasticGD()
-# 	calculateError(weight,bias)
+	weight,bias=runBatchGD()#runStochasticGD()
+	calculateError(weight,bias)
 
 
-# print 'totaltime:', time.time()-starttime
+print 'totaltime:', time.time()-starttime

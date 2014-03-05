@@ -55,6 +55,7 @@ while curr_error > epsilon:
 		w[j] = w[j] - step*(w[j]+C*gradient)
 
 	confidence = y[i]*(np.dot(x[i],w)+b)
+	gradient_b = 0
 	if confidence < 1:
 		gradient_b = -1*y[i]*C
 	else: 
@@ -64,8 +65,8 @@ while curr_error > epsilon:
 	i=(i%n)+1
 
 	errors = 0
-	for i in range(n):
-		confidence = 1-y[i]*(np.dot(w,x[i])+b)
+	for ii in range(n):
+		confidence = 1-y[ii]*(np.dot(w,x[ii])+b)
 		errors+=max(0,confidence)
 
 

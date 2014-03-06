@@ -91,8 +91,7 @@ for index,line in enumerate(file):
 	y_test[index]=float(line)
 
 num_mistakes = 0
-for index in range(6000):
-
+for index in range(len(x_test)):
 	if (np.dot(w,x_test[index])+b)>0:
 		target = 1
 	else:

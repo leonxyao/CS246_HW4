@@ -53,18 +53,20 @@ while curr_error > epsilon:
 	for j in range(d):
 		gradient = 0
 		for i in range(l*batch_size+1,min(n,(l+1)*batch_size)):
-			confidence = y[l]*(np.dot(x[l],w_prev)+b)
+			confidence = y[i]*(np.dot(x[i],w_prev)+b)
 			if confidence < 1:
-				gradient += -1*y[l]*x[l][j]
+				gradient += -1*y[i]*x[i][j]
 		w[j] = w[j] - step*(w[j]+C*gradient)
 
-	confidence = y[l]*(np.dot(x[l],w)+b)
 	gradient_b = 0
-	if confidence < 1:
-		gradient_b = -1*y[l]*C
-	else: 
-		gradient_b = 0
+	for i in range(l*batch_size+1,min(n,(l+1)*batch_size)):
+		confidence = y[i]*(np.dot(x[i],w)+b)
+		if confidence < 1:
+			gradient_b += -1*y[i]
+
+	gradient_b*=C
 	b = b-step*gradient_b
+
 	k=k+1
 	l = (l+1)%((n+batch_size-1)/batch_size)
 

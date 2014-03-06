@@ -6,20 +6,20 @@ k=0
 step = 0.0001
 epsilon = 0.001
 d=122
-n=6414
+n=6000
 w = np.zeros((122))
 b=0
 
 
 x = np.zeros((n,d))
-file = open('features.txt','r')
+file = open('features.train.txt','r')
 for index,line in enumerate(file):
 	for i,elem in enumerate(line.split(',')):
 		x[index][i] = float(elem)
 
 y = np.zeros(n)
 
-file = open('target.txt','r')
+file = open('target.train.txt','r')
 for index,line in enumerate(file):
 	y[index]=float(line)
 
@@ -79,14 +79,14 @@ while curr_error > epsilon:
 	print k, curr_error, f_k
 
 x_test = np.zeros((n,d))
-file = open('features.txt','r')
+file = open('features.test.txt','r')
 for index,line in enumerate(file):
 	for i,elem in enumerate(line.split(',')):
 		x_test[index][i] = float(elem)
 
 y_test = np.zeros(n)
 
-file = open('target.txt','r')
+file = open('target.test.txt','r')
 for index,line in enumerate(file):
 	y_test[index]=float(line)
 

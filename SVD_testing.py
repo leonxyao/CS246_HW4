@@ -92,7 +92,7 @@ for index,line in enumerate(file):
 
 num_mistakes = 0
 for index in range(len(x_test)):
-	if y_test[index]*(np.dot(w,x_test[index])+b)<=0
+	if y_test[index]*(np.dot(w,x_test[index])+b)<=0:
 		num_mistakes+=1
 
 print "mistakes: ", num_mistakes

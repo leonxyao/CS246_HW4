@@ -1,5 +1,6 @@
 import collections
 import numpy as np
+import copy
 
 C=100
 k=0

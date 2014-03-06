@@ -95,7 +95,7 @@ for index in range(len(x_test)):
 	if (np.dot(w,x_test[index])+b)>0:
 		target = 1
 	else:
-		target = 0
+		target = -1
 	if target != y_test[index]:
 		num_mistakes+=1
 

@@ -78,13 +78,13 @@ while curr_error > epsilon:
 	prev_fk = f_k
 	print k, curr_error, f_k
 
-x_test = np.zeros((n,d))
+x_test = np.zeros((414,d))
 file = open('features.test.txt','r')
 for index,line in enumerate(file):
 	for i,elem in enumerate(line.split(',')):
 		x_test[index][i] = float(elem)
 
-y_test = np.zeros(n)
+y_test = np.zeros(414)
 
 file = open('target.test.txt','r')
 for index,line in enumerate(file):

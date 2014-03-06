@@ -2,6 +2,7 @@ import collections
 import numpy as np
 import random
 import copy
+import time
 
 C=100
 k=0
@@ -38,6 +39,7 @@ for i in range(n):
 prev_fk = 0.5*sum(w**2) + C*init_errors 
 print prev_fk
 
+start_time = time.time()
 while curr_error > epsilon:
 	w_prev = copy.copy(w)
 	for j in range(d):
@@ -72,7 +74,7 @@ while curr_error > epsilon:
 	print k, curr_error, f_k
 
 
-
+print time.time()-start_time
 
 
 

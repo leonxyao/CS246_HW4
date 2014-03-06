@@ -1,5 +1,6 @@
 import collections
 import numpy as np
+import time
 
 C=100
 k=0
@@ -45,6 +46,7 @@ for i in range(n):
 prev_fk = 0.5*sum(w**2) + C*init_errors 
 print prev_fk
 
+start_time = time.time()
 i=0
 while curr_error > epsilon:
 	for j in range(d):
@@ -78,6 +80,5 @@ while curr_error > epsilon:
 	prev_fk = f_k
 	print k, curr_error, f_k
 
-
-
+print time.time()-start_time
 
